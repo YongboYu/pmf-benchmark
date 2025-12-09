@@ -3,7 +3,7 @@
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Paper](https://img.shields.io/badge/Paper-DOI-blue)](https://doi.org/10.1007/s44311-025-00031-7)
 
 A comprehensive framework for preprocessing event logs, extracting directly-follows (DF) relations, 
 converting them to time series, and benchmarking various forecasting models with statistical and 
