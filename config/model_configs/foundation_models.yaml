@@ -1,5 +1,0 @@
-models:
-  timegpt:
-    enabled: true
-    params:
-      api_key: "nixak-esjWPgyCHGwAgFJOQ4phy2ryxVpEh1Znmc1veSETI35H6nPRZ5xSeWVUdiQgdh4hZAFHk7f8qdOnoXTn"
