@@ -1,2 +1,1 @@
 """Entropic relevance (ER) metrics."""
-

@@ -202,7 +202,7 @@ class DFGConstructor:
                 reverse_map[target] = len(reverse_map)
 
         arcs = []
-        node_freq: dict[str, int] = {node: 0 for node in reverse_map.keys()}
+        node_freq: dict[str, int] = dict.fromkeys(reverse_map.keys(), 0)
 
         for (source, target), freq in dfg_truth.items():
             arcs.append(
@@ -297,7 +297,7 @@ class DFGConstructor:
                 reverse_map[dst] = len(reverse_map)
 
         arcs: list[dict[str, Any]] = []
-        node_freq: dict[str, float] = {node: 0.0 for node in reverse_map.keys()}
+        node_freq: dict[str, float] = dict.fromkeys(reverse_map.keys(), 0.0)
 
         for relation in window_pred.columns:
             if "->" not in relation:

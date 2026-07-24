@@ -1,0 +1,31 @@
+version = 1
+
+test_patterns = ["tests/**"]
+
+exclude_patterns = [
+  "temp/**",
+  "archive/**",
+  "data/**",
+  "data_archive/**",
+  "results/**",
+  "results_archive/**",
+  "notebooks/**",
+  "ER/**",
+  "ER_v2/**",
+  "dfgs/**",
+  "entroclus/**",
+  "**/__pycache__/**",
+  "*.pyc"
+]
+
+[[analyzers]]
+name = "secrets"
+
+[[analyzers]]
+name = "python"
+
+  [analyzers.meta]
+  runtime_version = "3.x.x"
+
+[[code_formatters]]
+name = "ruff"

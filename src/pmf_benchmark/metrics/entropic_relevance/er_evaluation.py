@@ -167,7 +167,7 @@ def evaluate_er_end_to_end(
         pred_df = predictions_by_model[model_key]
 
         rolling_pred_dfgs: dict[str, dict[str, Any]] = {}
-        for window_key in seq_test_log.keys():
+        for window_key in seq_test_log:
             start_date = window_key.split("_")[0]
             if start_date not in pred_df.index:
                 continue
