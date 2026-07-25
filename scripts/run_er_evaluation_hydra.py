@@ -18,7 +18,7 @@ def _ensure_src_on_path() -> None:
 def main(cfg: DictConfig) -> None:
     _ensure_src_on_path()
 
-    from pmf_benchmark.metrics.entropic_relevance.run_fast import (  # noqa: PLC0415
+    from pmf_benchmark.metrics.entropic_relevance.run_fast import (
         ERFastConfig,
         run_er_evaluation_fast,
     )

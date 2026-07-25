@@ -202,9 +202,8 @@ def calculate_entropic_relevance(
             ),
         }
 
-        if (
-            best is None
-            or not math.isnan(er)
+        if best is None or (
+            not math.isnan(er)
             and (
                 math.isnan(best["entropic_relevance"])
                 or er < best["entropic_relevance"]

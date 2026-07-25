@@ -28,12 +28,12 @@ dependencies = [
     "reportlab>=4.4.0",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
-    "ruff>=0.8.0",
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
-    "pre-commit>=3.0.0",
+    "pre-commit>=4.0",
+    "ruff>=0.8",
+    "pytest>=8.0",
+    "pytest-cov>=6.0",
 ]
 
 [build-system]
@@ -64,11 +64,28 @@ extend-exclude = [
 ]
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B", "W", "C4", "SIM"]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "S",    # flake8-bandit (security)
+    "C4",   # flake8-comprehensions
+    "RUF",  # Ruff-specific rules
+]
 ignore = [
     "E501",   # line too long (handled by formatter)
-    "B008",   # do not perform function calls in argument defaults
+    "B008",   # function calls in argument defaults (common with Hydra)
+    "S101",   # assert usage (fine in tests)
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+"__init__.py" = ["F401"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["pmf_benchmark"]
@@ -76,6 +93,7 @@ known-first-party = ["pmf_benchmark"]
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+docstring-code-format = true
 
 # =============================================================================
 # Pytest Configuration

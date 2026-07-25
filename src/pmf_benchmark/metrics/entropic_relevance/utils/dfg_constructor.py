@@ -182,7 +182,7 @@ class DFGConstructor:
                 import pm4py  # type: ignore
 
                 sublog = pm4py.insert_artificial_start_end(sublog)
-            except Exception:
+            except Exception:  # noqa: S110 - pm4py optional; skip markers if unavailable
                 pass
 
             sublogs[window_key] = sublog
@@ -307,7 +307,7 @@ class DFGConstructor:
             dst = dst.replace("▶", "Start").replace("■", "End")
             if src not in reverse_map or dst not in reverse_map:
                 continue
-            total_freq = int(round(float(window_pred[relation].sum())))
+            total_freq = round(float(window_pred[relation].sum()))
             if total_freq <= 0:
                 continue
             arcs.append(
@@ -336,7 +336,7 @@ class DFGConstructor:
             {
                 "label": node,
                 "id": node_id,
-                "freq": int(round(node_freq.get(node, 0.0))),
+                "freq": round(node_freq.get(node, 0.0)),
             }
             for node, node_id in reverse_map.items()
         ]

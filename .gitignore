@@ -144,4 +144,4 @@ results/*
 /fake
 
 # UV package manager
-uv.lock
+# uv.lock is committed for reproducible CI (uv sync --frozen)
