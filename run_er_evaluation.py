@@ -11,7 +11,7 @@ def main() -> int:
     if src_dir.exists():
         sys.path.insert(0, str(src_dir))
 
-    from pmf_benchmark.metrics.entropic_relevance.run_fast import (  # noqa: PLC0415
+    from pmf_benchmark.metrics.entropic_relevance.run_fast import (
         ERFastConfig,
         run_er_evaluation_fast,
     )

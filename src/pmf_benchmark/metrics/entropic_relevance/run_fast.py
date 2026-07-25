@@ -93,7 +93,7 @@ def _load_cache(cache_path: Path) -> dict[str, Any] | None:
         return None
     try:
         with cache_path.open("rb") as f:
-            return pickle.load(f)
+            return pickle.load(f)  # noqa: S301 - trusted cache written by this module
     except Exception:
         return None
 
