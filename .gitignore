@@ -123,6 +123,7 @@ venv.bak/
 data/raw/
 data/interim/
 data/processed/*
+data/external/
 !data/processed/*/metadata.json
 !data/processed/*/stats.json
 !data/processed/*/df_relations.csv

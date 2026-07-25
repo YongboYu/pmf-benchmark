@@ -1,0 +1,16 @@
+dataset: BPI2017
+horizon: 7
+start_time: null
+log_file: null
+predictions_root: null
+output_dir: results/er_metrics_v2_fast
+cache_dir: null
+no_cache: false
+models: null
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  job:
+    chdir: false

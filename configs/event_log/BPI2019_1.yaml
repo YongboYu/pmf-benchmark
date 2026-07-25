@@ -11,4 +11,3 @@ filter_attribute: "case:Item Category"
 category: "3-way match, invoice before GR"
 filter_start_time: "2018-01-01 00:00:00"
 filter_end_time: "2019-01-28 23:59:59"
-

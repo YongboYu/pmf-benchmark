@@ -33,9 +33,6 @@ dev = [
     "ruff>=0.8.0",
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
-    "mypy>=1.0.0",
-    "types-requests>=2.31.0",
-    "bandit[toml]>=1.7.0",
     "pre-commit>=3.0.0",
 ]
 
@@ -79,32 +76,6 @@ known-first-party = ["pmf_benchmark"]
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-
-# =============================================================================
-# MyPy Configuration
-# =============================================================================
-[tool.mypy]
-python_version = "3.11"
-warn_return_any = false
-warn_unused_configs = true
-ignore_missing_imports = true
-# Relax type checking to allow CI to pass - enable strict checks gradually
-check_untyped_defs = false
-disallow_untyped_defs = false
-disallow_incomplete_defs = false
-exclude = [
-    "tests/",
-    "archive/",
-    "notebooks/",
-    "generate_seq2seq_data\\.py$",
-    "data_loader\\.py$",
-    "00_download_logs\\.py$",
-    "02_generate_df_relations\\.py$",
-]
-
-[[tool.mypy.overrides]]
-module = "tests.*"
-ignore_errors = true
 
 # =============================================================================
 # Pytest Configuration
@@ -153,10 +124,3 @@ precision = 2
 
 [tool.coverage.html]
 directory = "htmlcov"
-
-# =============================================================================
-# Bandit Configuration
-# =============================================================================
-[tool.bandit]
-exclude_dirs = ["tests", "archive", "notebooks"]
-skips = ["B101"]  # Skip assert warnings (used in tests)

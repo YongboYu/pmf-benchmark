@@ -5,8 +5,8 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Paper](https://img.shields.io/badge/Paper-DOI-blue)](https://doi.org/10.1007/s44311-025-00031-7)
 
-A comprehensive framework for preprocessing event logs, extracting directly-follows (DF) relations, 
-converting them to time series, and benchmarking various forecasting models with statistical and 
+A comprehensive framework for preprocessing event logs, extracting directly-follows (DF) relations,
+converting them to time series, and benchmarking various forecasting models with statistical and
 entropic relevance evaluation.
 
 ## Overview
