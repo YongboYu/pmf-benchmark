@@ -1,14 +1,14 @@
-import pm4py
 import json
-import pandas as pd
-from pathlib import Path
-from typing import Dict, Any, List
 import logging
+from pathlib import Path
+from typing import Any
+
+import pm4py
 from pm4py.objects.log.obj import EventLog
 
 
 class DFGenerator:
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: dict[str, Any]):
         self.config = config
         self.logger = logging.getLogger(__name__)
 
@@ -31,7 +31,7 @@ class DFGenerator:
             self.logger.error(f"Error generating DF relations for {dataset}: {e}")
             raise
 
-    def _extract_df_relations(self, log) -> Dict[str, List[Dict]]:
+    def _extract_df_relations(self, log) -> dict[str, list[dict]]:
         """Extract directly-follows relations from log"""
         df_dict = {}
 
@@ -43,10 +43,10 @@ class DFGenerator:
                 event_b = trace[i + 1]
 
                 # Extract activity names and timestamps
-                activity_a = event_a[self.config['event_log']['columns']['activity']]
-                activity_b = event_b[self.config['event_log']['columns']['activity']]
-                start_time = event_a[self.config['event_log']['columns']['timestamp']]
-                end_time = event_b[self.config['event_log']['columns']['timestamp']]
+                activity_a = event_a[self.config["event_log"]["columns"]["activity"]]
+                activity_b = event_b[self.config["event_log"]["columns"]["activity"]]
+                start_time = event_a[self.config["event_log"]["columns"]["timestamp"]]
+                end_time = event_b[self.config["event_log"]["columns"]["timestamp"]]
 
                 # Calculate duration
                 duration = end_time - start_time
@@ -59,18 +59,20 @@ class DFGenerator:
                     df_dict[df_key] = []
 
                 # Append relation information
-                df_dict[df_key].append({
-                    'start_time': start_time,
-                    'end_time': end_time,
-                    'duration': duration
-                })
+                df_dict[df_key].append(
+                    {
+                        "start_time": start_time,
+                        "end_time": end_time,
+                        "duration": duration,
+                    }
+                )
 
         return df_dict
 
-    def _save_df_relations(self, df_dict: Dict[str, List[Dict]], dataset: str):
+    def _save_df_relations(self, df_dict: dict[str, list[dict]], dataset: str):
         """Save DF relations to JSON"""
-        output_path = Path(self.config['paths']['interim']['df_relations'])
+        output_path = Path(self.config["paths"]["interim"]["df_relations"])
         output_path.mkdir(parents=True, exist_ok=True)
 
-        with open(output_path / f'{dataset}.json', 'w') as f:
+        with open(output_path / f"{dataset}.json", "w") as f:
             json.dump(df_dict, f, default=str, indent=4)

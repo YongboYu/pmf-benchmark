@@ -7,12 +7,12 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 # ###########
 
 import argparse
-import yaml
 import logging
-import pandas as pd
 from pathlib import Path
-from preprocessing.event_log_processor import EventLogProcessor
+
+import yaml
 from preprocessing.df_generator import DFGenerator
+from preprocessing.event_log_processor import EventLogProcessor
 from preprocessing.time_series_creator import TimeSeriesCreator
 from utils.logging_manager import get_logging_manager
 
@@ -25,11 +25,19 @@ def setup_logging(config: dict) -> logging.Logger:
 
 def main():
     parser = argparse.ArgumentParser(description="Preprocess event logs to time series")
-    parser.add_argument("--dataset", type=str, required=True, nargs='+',
-                        help="Names of the event log files (without extension)")
-    parser.add_argument("--config", type=str,
-                        default="config/preprocessing_config.yaml",
-                        help="Path to preprocessing configuration")
+    parser.add_argument(
+        "--dataset",
+        type=str,
+        required=True,
+        nargs="+",
+        help="Names of the event log files (without extension)",
+    )
+    parser.add_argument(
+        "--config",
+        type=str,
+        default="config/preprocessing_config.yaml",
+        help="Path to preprocessing configuration",
+    )
 
     args = parser.parse_args()
 
@@ -63,7 +71,7 @@ def main():
                 df_dict=df_dict,
                 start_time=start_time,
                 end_time=end_time,
-                dataset=dataset
+                dataset=dataset,
             )
 
             logger.info(f"Successfully processed {dataset}")
@@ -72,6 +80,7 @@ def main():
             logger.error(f"Error processing {dataset}: {e}")
             logger.error("Continuing with next dataset...")
             continue
+
 
 if __name__ == "__main__":
     main()
