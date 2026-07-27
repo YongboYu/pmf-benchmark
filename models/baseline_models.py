@@ -1,23 +1,20 @@
 import logging
-from darts.models import (
-    NaiveMean,
-    NaiveSeasonal,
-    NaiveDrift,
-    NaiveMovingAverage
-)
+import time
+from pathlib import Path
+from typing import Any
+
 import wandb
 import yaml
-from pathlib import Path
-from typing import Dict, Any, Optional, Union, List
-import time
-from utils.wandb_logger import WandbLogger
+from darts.models import NaiveDrift, NaiveMean, NaiveMovingAverage, NaiveSeasonal
 from utils.data_loader import DataLoader
+from utils.wandb_logger import WandbLogger
 
 # Initialize logger
 logger = logging.getLogger(__name__)
 
+
 class BaselineModels:
-    def __init__(self, config: Union[Dict[str, Any], str], model_name: Optional[str] = None):
+    def __init__(self, config: dict[str, Any] | str, model_name: str | None = None):
         """Initialize baseline models.
 
         Args:
@@ -27,11 +24,13 @@ class BaselineModels:
         # Load configurations
         if isinstance(config, dict):
             self.base_config = config
-            self.model_config = config['model_configs']['baseline_models']
+            self.model_config = config["model_configs"]["baseline_models"]
         else:
-            with open(config, 'r') as f:
+            with open(config) as f:
                 self.base_config = yaml.safe_load(f)
-            with open(Path(config).parent / 'model_configs' / 'baseline_models.yaml', 'r') as f:
+            with open(
+                Path(config).parent / "model_configs" / "baseline_models.yaml"
+            ) as f:
                 self.model_config = yaml.safe_load(f)
 
         # Initialize DataLoader
@@ -41,21 +40,23 @@ class BaselineModels:
         self.models = {}
         if model_name:
             # Initialize single model if specified
-            model_info = self.model_config['models'].get(model_name)
-            if not model_info or not model_info['enabled']:
+            model_info = self.model_config["models"].get(model_name)
+            if not model_info or not model_info["enabled"]:
                 raise ValueError(f"Model {model_name} not found or not enabled")
             self.models[model_name] = self._initialize_model(model_name, model_info)
         else:
             # Initialize all enabled models
-            for model_name, model_info in self.model_config['models'].items():
-                if model_info['enabled']:
-                    self.models[model_name] = self._initialize_model(model_name, model_info)
+            for model_name, model_info in self.model_config["models"].items():
+                if model_info["enabled"]:
+                    self.models[model_name] = self._initialize_model(
+                        model_name, model_info
+                    )
 
         self.training_time = 0
 
-    def _initialize_model(self, model_name: str, model_info: Dict[str, Any]):
+    def _initialize_model(self, model_name: str, model_info: dict[str, Any]):
         """Initialize baseline model with or without parameters"""
-        params = model_info.get('params', {})
+        params = model_info.get("params", {})
 
         # if self.wandb_logger is not None:
         #     wandb.config.update({
@@ -66,9 +67,7 @@ class BaselineModels:
 
         if model_name == "naive_mean":
             return NaiveMean()
-        elif model_name == "persistence":
-            return NaiveSeasonal(**params)
-        elif model_name == "naive_seasonal":
+        elif model_name == "persistence" or model_name == "naive_seasonal":
             return NaiveSeasonal(**params)
         elif model_name == "naive_drift":
             return NaiveDrift()
@@ -77,9 +76,18 @@ class BaselineModels:
         else:
             raise ValueError(f"Unknown model: {model_name}")
 
-    def train_and_predict(self, model_name: str, train, val, test, transformer,
-                          horizon: int, dataset: str, study: Optional[Any] = None,
-                          wandb_logger: WandbLogger = None) -> Dict[str, Any]:
+    def train_and_predict(
+        self,
+        model_name: str,
+        train,
+        val,
+        test,
+        transformer,
+        horizon: int,
+        dataset: str,
+        study: Any | None = None,
+        wandb_logger: WandbLogger = None,
+    ) -> dict[str, Any]:
         """Train models and generate predictions using expanding window approach"""
         # Set wandb_logger as instance attribute
         self.wandb_logger = wandb_logger
@@ -89,29 +97,21 @@ class BaselineModels:
             return {}
 
         # Get model configuration parameters
-        model_info = self.model_config['models'].get(model_name, {})
-        model_params = model_info.get('params', {})
+        model_info = self.model_config["models"].get(model_name, {})
+        model_params = model_info.get("params", {})
 
         # Update wandb config with just the model parameters in a single dictionary
         if self.wandb_logger is not None:
-            wandb.config.update({
-                "model_params": {
-                    model_name: model_params
-                }
-            })
+            wandb.config.update({"model_params": {model_name: model_params}})
 
         # Log that we're starting to train this model
         # wandb.log({f"baseline_training_model": model_name})
-
 
         try:
             model = self.models[model_name]
             # Create expanding window test dataset for final evaluation
             test_input_seq, test_output_seq = self.data_loader.create_expanding_io_data(
-                train=train,
-                val=val,
-                test=test,
-                horizon=horizon
+                train=train, val=val, test=test, horizon=horizon
             )
 
             start_time = time.time()
@@ -132,31 +132,31 @@ class BaselineModels:
 
             # Log metrics if wandb_logger is available
             # if wandb_logger:
-                # wandb_logger.log_metrics({
-                #     'training_time': training_time,
-                #     'model_type': str(type(model).__name__),
-                #     'horizon': horizon,
-                #     'dataset': dataset
-                # }, prefix=model_name)
-                #
-                # # Log model artifacts
-                # wandb_logger.log_model_artifacts(model_name, {
-                #     'model_type': str(type(model).__name__),
-                #     'training_time': training_time,
-                #     'dataset': dataset,
-                #     'horizon': horizon
-                # })
+            # wandb_logger.log_metrics({
+            #     'training_time': training_time,
+            #     'model_type': str(type(model).__name__),
+            #     'horizon': horizon,
+            #     'dataset': dataset
+            # }, prefix=model_name)
+            #
+            # # Log model artifacts
+            # wandb_logger.log_model_artifacts(model_name, {
+            #     'model_type': str(type(model).__name__),
+            #     'training_time': training_time,
+            #     'dataset': dataset,
+            #     'horizon': horizon
+            # })
 
             return {
-                'predictions': all_predictions,
-                'actuals': test_output_seq,
-                'model': model,
-                'training_time': training_time,
-                'model_name': model_name
+                "predictions": all_predictions,
+                "actuals": test_output_seq,
+                "model": model,
+                "training_time": training_time,
+                "model_name": model_name,
             }
 
         except Exception as e:
-            error_msg = f"Error training {model_name}: {str(e)}"
+            error_msg = f"Error training {model_name}: {e!s}"
             logger.error(error_msg)
             # if wandb_logger:
             #     wandb_logger.log_metrics({
@@ -165,6 +165,6 @@ class BaselineModels:
             #     }, prefix=model_name)
             raise
 
-    def get_model_names(self) -> List[str]:
+    def get_model_names(self) -> list[str]:
         """Get list of enabled model names."""
         return list(self.models.keys())

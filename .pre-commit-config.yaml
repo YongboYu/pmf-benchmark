@@ -1,16 +1,9 @@
 default_language_version:
   python: python3.11
 
-# Legacy top-level code (models/, preprocessing/, utils/, train.py) predates the
-# src/ package layout and is not yet linted to the current ruff standard. Scope
-# pre-commit to the maintained package + data artefacts are excluded from all hooks.
+# Exclude data / experiment artefacts (not source code) from all hooks.
 exclude: |
   (?x)^(
-    models/|
-    preprocessing/|
-    utils/|
-    train\.py|
-    scripts/preprocess_logs\.py|
     archive/|
     data/|
     data_archive/|
