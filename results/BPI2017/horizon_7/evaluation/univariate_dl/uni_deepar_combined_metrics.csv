@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+BPI2017,7,univariate_dl_uni_deepar,10.335151,13.562679,10.3469515,20.208635,2026-11-15 04:10:24
