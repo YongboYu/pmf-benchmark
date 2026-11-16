@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+DomesticDeclarations,7,univariate_regression_uni_xgboost,1.7302625979804145,2.3398234271787555,1.817618458312149,4.734858432790987,2026-11-16 19:56:23
