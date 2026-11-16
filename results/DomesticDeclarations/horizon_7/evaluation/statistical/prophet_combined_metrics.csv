@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+DomesticDeclarations,7,statistical_prophet,3.6941728149802,5.155648226784491,6.657208474642348,24.242496506619162,2026-11-16 22:00:35

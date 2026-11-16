@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+DomesticDeclarations,7,baseline_persistence,2.7300944258300337,3.474804787872955,1.4995735607675906,3.935355872727889,2026-11-17 00:06:05

@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+DomesticDeclarations,7,covariate_regression_cov_xgboost,1.6572513797931667,2.205264715538822,1.748096940603424,4.209671190658194,2026-11-16 15:16:36
