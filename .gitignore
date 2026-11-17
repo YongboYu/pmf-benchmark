@@ -134,7 +134,9 @@ logs/wandb/
 logs/optuna/
 logs/*.log
 
-results/*
+results/**
+!results/**/
+!results/**/*.csv
 !results/results_log.json
 
 # DVC

@@ -1,0 +1,29 @@
+common:
+  lags:
+    horizon_7:
+      min_lag: 7
+      max_lag: 56
+      step_size: 7
+    horizon_28:
+      min_lag: 28
+      max_lag: 84
+      step_size: 7
+  n_trials: 50
+
+models:
+  random_forest:
+    enabled: true
+    hyperparameter_ranges:
+      n_estimators: [100, 200, 300, 400, 500]
+#      max_depth: [3, 5, 7, 10, 15]
+#      min_samples_split: [2, 5, 10]
+#      min_samples_leaf: [1, 2, 4]
+
+  xgboost:
+    enabled: true
+    hyperparameter_ranges:
+      n_estimators: [100, 200, 300, 400, 500]
+      max_depth: [3, 5, 7, 10, 15]
+      learning_rate: [0.3, 0.1, 0.05, 0.01]
+#      subsample: [0.6, 0.8, 1.0]
+#      colsample_bytree: [0.6, 0.8, 1.0]

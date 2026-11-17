@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+BPI2017,7,baseline_naive_moving_average,13.33706820150259,17.852846364447288,12.695890945080665,22.45396209482521,2026-11-14 18:19:01

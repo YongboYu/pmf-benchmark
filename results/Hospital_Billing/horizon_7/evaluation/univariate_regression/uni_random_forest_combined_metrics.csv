@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+Hospital_Billing,7,univariate_regression_uni_random_forest,1.8662159510566563,2.154526928118724,2.0815403508521384,6.201561122856256,2026-11-11 01:17:46

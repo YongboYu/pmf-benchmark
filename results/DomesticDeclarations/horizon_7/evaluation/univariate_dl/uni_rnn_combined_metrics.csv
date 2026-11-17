@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+DomesticDeclarations,7,univariate_dl_uni_rnn,1.8511045,2.4156618,1.9490547,4.6811604,2026-11-16 19:25:38

@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+Hospital_Billing,7,baseline_naive_mean,2.4262934874760793,2.7092427637533008,2.500232417573681,7.535677602483086,2026-11-10 18:07:43

@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+Hospital_Billing,7,statistical_arima,1.4458656902802358,1.7427808637452906,1.6645266769156153,5.580111764022027,2026-11-10 19:16:06

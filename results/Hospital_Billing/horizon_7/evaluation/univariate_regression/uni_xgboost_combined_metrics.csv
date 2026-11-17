@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+Hospital_Billing,7,univariate_regression_uni_xgboost,1.849053726743629,2.1465655199704914,2.0447169638292864,6.031543858353466,2026-11-11 02:55:48

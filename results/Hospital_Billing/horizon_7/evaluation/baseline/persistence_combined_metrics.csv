@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+Hospital_Billing,7,baseline_persistence,1.6927536231884057,2.023970191973181,1.916438923395445,6.047010958481201,2026-11-10 18:05:23

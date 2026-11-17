@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+BPI2017,7,statistical_ar2,19.23773499271182,22.39636661568597,19.076147699342076,32.93190998069395,2026-11-14 18:21:12

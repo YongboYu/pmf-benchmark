@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import numpy.typing  # noqa: F401 - Darts 0.48 requires this with NumPy 1.x.
 import yaml
 from models.baseline_models import BaselineModels
 from models.covariate_dl_models import CovariateDLModels
