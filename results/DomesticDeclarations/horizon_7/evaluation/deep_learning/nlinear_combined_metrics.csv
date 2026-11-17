@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+DomesticDeclarations,7,deep_learning_nlinear,2.1124532,2.603253,1.632267,3.9428036,2026-11-17 03:19:15

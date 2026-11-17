@@ -1,0 +1,2 @@
+dataset,horizon,model,all_points_mae,all_points_rmse,last_point_mae,last_point_rmse,timestamp
+BPI2017,7,deep_learning_rnn,9.306133,12.022611,9.084297,16.435621,2026-11-13 13:39:35
